@@ -2,4 +2,7 @@
 Test cases for MIPS CPU implementation
 
 ## Links
- 1. https://github.com/xyongcn/LoongsonCsprj2017
+ * [wiki page](https://github.com/xyongcn/LoongsonCsprj2017)
+
+## 仓库代码目录
+ * [func_test](func_test/readme.md)：功能测试用例
