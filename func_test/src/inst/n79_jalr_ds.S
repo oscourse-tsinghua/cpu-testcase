@@ -11,7 +11,7 @@
     .globl n79_jalr_ds_test
 n79_jalr_ds_test:
     .set noreorder
-    lui  a0, 0x4F00
+    li  a0, 0x4F
     li  v0, 0x00
 ###test inst
     TEST_JALR_DS
@@ -22,8 +22,8 @@ n79_jalr_ds_test:
     addiu s3, s3, 1
 ###output a0|s3
 inst_error:  
-    or t0, a0, s3 
-    sw t0, 0(s1)
+    sw s3, 0($23)
+    sw a0, 0(s1)
     jr ra
     nop
 ####END(n79_jalr_ds_test)

@@ -11,7 +11,7 @@
     .globl n88_j_ex_ds_test
 n88_j_ex_ds_test:
     .set noreorder
-    lui  a0, 0x5800
+    li  a0, 0x58
 #    li  v0, 0x09
 ###test inst
     TEST_J_EX_DS_EX_ADDI
@@ -33,8 +33,8 @@ n88_j_ex_ds_test:
     addiu s3, s3, 1
 ###output a0|s3
 inst_error:  
-    or t0, a0, s3 
-    sw t0, 0(s1)
+    sw s3, 0($23)
+    sw a0, 0(s1)
     jr ra
     nop
 ####END(n88_j_ex_ds_test)
