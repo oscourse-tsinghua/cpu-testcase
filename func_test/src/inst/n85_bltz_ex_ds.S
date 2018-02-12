@@ -7,7 +7,6 @@
 #include <inst_delay_slot_test.h>
 
 ###LEAF(n85_bltz_ex_ds_test)
-    .data
     .globl n85_bltz_ex_ds_test
 n85_bltz_ex_ds_test:
     .set noreorder

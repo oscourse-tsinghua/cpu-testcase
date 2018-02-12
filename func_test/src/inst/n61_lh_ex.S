@@ -7,7 +7,6 @@
 #include <inst_ex_test.h>
 
 ####LEAF(n61_lh_ex_test)
-    .data
     .globl n61_lh_ex_test
 n61_lh_ex_test:
     .set noreorder
