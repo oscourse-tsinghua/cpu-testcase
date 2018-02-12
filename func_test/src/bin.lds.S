@@ -16,6 +16,8 @@ SECTIONS
     /* .gnu.warning sections are handled specially by elf32.em.  */
     *(.gnu.warning)
     *(.MIPS.abiflags)
+    . = ALIGN(0x1000);
+    *(.text.ebase)
     rodata_end = .;
   } =0
   _etext = .;

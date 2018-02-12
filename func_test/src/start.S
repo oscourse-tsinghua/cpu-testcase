@@ -52,9 +52,10 @@
 #include <ns16550.h>
 #include <asm/context.h>
 
-#define LED_ADDR                0xbfd0f000
-#define NUM_ADDR                0xbfd0f010
+#define LED_ADDR                0xbfd00400
+#define NUM_ADDR                0xbfd00408
 
+    .section .text
 	.set	noreorder
 	.globl	_start
 	.globl	start
@@ -62,8 +63,9 @@
 #   .set noat
 _start:
 start:
-    lui a2,0x0040
-	mtc0	a2, c0_status
+    la  a2,ebase_entry
+    mtc0  a2, c0_ebase  /* set base address of the exception vectors */
+	mtc0	zero, c0_status /* set BEV=0 */
 	mtc0	zero, c0_cause
 	la	sp, _stack
 	la	gp, _gp
@@ -75,10 +77,12 @@ start:
 	j	locate			/* Get current execute address */
 	nop
 
+    .section .text.ebase
+ebase_entry:
 /*
- *  exception handle
+ *  TLB Refill exception handle, at CP0_Ebase + 0x0
  */
-.org 0x180
+.org 0x0
     lui v1, 0xffe8
     ori v1, 0xdc03
     beq v0, v1, tlbwr_ex
@@ -88,7 +92,10 @@ start:
     beq v0, v1, tlbwi_ex
     nop
 
-.org 0x380
+/*
+ *  other exception handle, at CP0_Ebase + 0x180
+ */
+.org 0x180
     li  v1, 0x01 # syscall
     beq v0, v1, syscall_ex
     nop
@@ -316,7 +323,7 @@ tlbwi_ex:
     .set mips1
     nop
 
-
+    .section .text
 locate:
 	.set noreorder
 
@@ -532,14 +539,6 @@ inst_test:
     nop
     jal wait_1s
     nop
- #  jal n52_lwl_test     #lwl
- #  nop
- #  jal wait_1s
- #  nop
- #  jal n53_lwr_test     #lwr
- #  nop
- #  jal wait_1s
- #  nop
     jal n52_sb_test      #sb
     nop
     jal wait_1s
@@ -552,14 +551,6 @@ inst_test:
     nop
     jal wait_1s
     nop
- ###jal n57_swl_test     #swl
- ###nop
- ###jal wait_1s
- ###nop
- ###jal n58_swr_test     #swr
- ###nop
- ###jal wait_1s
- ###nop
     jal n55_eret_test    #eret
     nop
     jal wait_1s
