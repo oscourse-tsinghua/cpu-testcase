@@ -311,9 +311,9 @@ tlbwi_ex:
     ori a1, 0xe000
     and v1, a1, v1
     mtc0 v1, c0_entryhi
-    li v1, 0x0007
+    li v1, 0x4007
     mtc0 v1, c0_entrylo0
-    li v1, 0x0007
+    li v1, 0x4007
     mtc0 v1, c0_entrylo1
     tlbwi
     lui v1, 0xed12

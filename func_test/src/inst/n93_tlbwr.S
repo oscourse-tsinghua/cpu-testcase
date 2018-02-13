@@ -22,8 +22,8 @@ test_gbit_start:
     lui a3, 0x1234
     ori a3, 0x5867
     li k0, 0x0001  ##label tlbwr_allbit
-    li t0, 0x0000 ##entry lo0
-    li t1, 0x0000 ##entry lo1
+    li t0, 0x4000 ##entry lo0
+    li t1, 0x4000 ##entry lo1
     sw a3, 0(s2)
     nop
     nop
@@ -41,6 +41,10 @@ test_gbit_start:
     ori a3, 0x5867
     bne a3, t0, inst_error
     nop
+    li  s2, 0x80100124 #bypass TLB
+    lw t0, 0(s2)
+    bne a3, t0, inst_error
+    nop
 test_asid_match:
     lui v0, 0xffe8
     ori v0, 0xdc03
@@ -51,8 +55,8 @@ test_asid_match:
     ori s0, 0xe0dc ##entry hi: 0x0012e0dc
     lui a3, 0xe235
     ori a3, 0xe8f7
-    li t0, 0x0006
-    li t1, 0x0006
+    li t0, 0x4006 ##entry lo0
+    li t1, 0x4006 ##entry lo1
     sw a3, 0(s2) ##access 0x0012e124
     nop
     nop
@@ -68,8 +72,8 @@ test_asid_match:
     mtc0 s0, c0_entryhi #set current ASID
     lui s2, 0x0013
     ori s2, 0xf124
-    li t0, 0x0006
-    li t1, 0x0006
+    li t0, 0x4006 ##entry lo0
+    li t1, 0x4006 ##entry lo1
     lw t0, 0(s2) ##access 0x0013f124
     lui a3, 0xe235
     ori a3, 0xe8f7
@@ -85,8 +89,8 @@ test_asid_2:
     ori s0, 0xe0dc ##entry hi: 0x0014e0dc
     lui a3, 0xbd86
     ori a3, 0x13ac
-    li t0, 0x0006
-    li t1, 0x0000
+    li t0, 0x4006 ##entry lo0
+    li t1, 0x4000 ##entry lo1
     sw a3, 0(s2)
     nop
     nop
@@ -101,8 +105,8 @@ test_asid_2:
     ori s2, 0xf124
     lui s0, 0x0015
     ori s0, 0xe0dc ##entry hi: 0x0015e0dc
-    li t0, 0x0000
-    li t1, 0x0002
+    li t0, 0x4000 ##entry lo0
+    li t1, 0x4002 ##entry lo1
     li k0, 0x0003  #label tlbwr_asid
     lw a3, 0(s2)
     lui a3, 0xed08
