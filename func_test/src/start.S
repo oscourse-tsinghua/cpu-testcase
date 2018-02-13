@@ -67,8 +67,8 @@ start:
     mtc0  a2, c0_ebase  /* set base address of the exception vectors */
 	mtc0	zero, c0_status /* set BEV=0 */
 	mtc0	zero, c0_cause
-	la	sp, _stack
-	la	gp, _gp
+	# la	sp, _stack
+	# la	gp, _gp
     ori a3,zero,0x0000
     mtlo a3
     ori t8,zero,0x0000

@@ -26,21 +26,23 @@ SECTIONS
   /* . = MEMSTART; */
   .data    : AT(rodata_end)
   {
+    /*
     _fdata = . ;
     _stack = _fdata + MEMSIZE -32;
     *(.data)
     *(.data*) 
-                __CTOR_LIST__ = .;
-                LONG((__CTOR_END__ - __CTOR_LIST__) / 4 - 2)
-               *(.ctors)
-                LONG(0)
-                __CTOR_END__ = .;
-                __DTOR_LIST__ = .;
-                LONG((__DTOR_END__ - __DTOR_LIST__) / 4 - 2)
-               *(.dtors)
-                LONG(0)
-                __DTOR_END__ = .;
-  _gp = ALIGN(16) + 0x7ff0;
+    __CTOR_LIST__ = .;
+    LONG((__CTOR_END__ - __CTOR_LIST__) / 4 - 2)
+   *(.ctors)
+    LONG(0)
+    __CTOR_END__ = .;
+    __DTOR_LIST__ = .;
+    LONG((__DTOR_END__ - __DTOR_LIST__) / 4 - 2)
+   *(.dtors)
+    LONG(0)
+    __DTOR_END__ = .;
+    _gp = ALIGN(16) + 0x7ff0;
+    */
     *(.got.plt) *(.got)
   /* We want the small data sections together, so single-instruction offsets
      can access them all, and initialized data all before uninitialized, so

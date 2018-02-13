@@ -17,14 +17,16 @@ export TOPDIR AR CFLAGS
 
 export CROSS_COMPILE ?= mipsel-linux-gnu-
 
-all: main.bin main.text main.data
+all: main.bin
 
 libinst.a:
 	make -C inst $(TOPDIR)/$@
 
 %.elf: start.o libinst.a bin.lds
 	${CROSS_COMPILE}ld -g -T  bin.lds  -o $@ start.o -L . -linst
-	${CROSS_COMPILE}objdump -alD $@ > test.s
+
+dump.s: main.elf
+	${CROSS_COMPILE}objdump -alD $< > $@
 
 bin.lds: bin.lds.S
 	${CROSS_COMPILE}gcc -E -P -Umips -D_LOADER -U_MAIN $(CFLAGS) bin.lds.S -o bin.lds
