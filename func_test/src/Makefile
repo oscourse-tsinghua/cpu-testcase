@@ -24,6 +24,7 @@ libinst.a:
 
 %.elf: start.o libinst.a bin.lds
 	${CROSS_COMPILE}ld -g -T  bin.lds  -o $@ start.o -L . -linst
+	rm libinst.a
 
 dump.s: main.elf
 	${CROSS_COMPILE}objdump -alD $< > $@
