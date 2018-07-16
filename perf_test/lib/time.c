@@ -31,7 +31,7 @@ unsigned long get_clock()
 }
 
 unsigned get_us() {
-    return *((volatile unsigned *)TIMER_MILISEC_ADDR);
+    return *((volatile unsigned *)TIMER_MICROSEC_ADDR);
 }
 
 unsigned long get_ns() {
