@@ -1,7 +1,8 @@
 ver = test_hw
 #ver = sim
 
-TOPDIR=$(shell pwd)
+# Escape the space in dir path
+TOPDIR=$(shell pwd | sed 's: :\\ :g')
 
 export LD_PRELOAD =
 CFLAGS := -D_KERNEL -DCONFIG_PAGE_SIZE_16KB -fno-builtin -mips32r2 -msoft-float -DCACHELOCK_MEM -DMEMSTART=0x80000000 -DMEMSIZE=0x0200000 -DCPU_COUNT_PER_US=10 -I $(TOPDIR)/include -include common.h -DAPB_CLK=33333333
@@ -35,17 +36,8 @@ bin.lds: bin.lds.S
 main.bin:main.elf
 	${CROSS_COMPILE}objcopy -O binary -j .text -j .data $< $@ 
 
-main.text:main.elf
-	${CROSS_COMPILE}objcopy -O binary -j .text $< $@ 
-
-main.data:main.elf
-	${CROSS_COMPILE}objcopy -O binary -j .data $< $@ 
-
-convert:convert.c
-	gcc  $(ALIGNED) -o convert  convert.c
-
 clean:
-	rm -f *.o *.bin *.data *.elf *.a *.s *.vlog *.coe *.mif bin.lds convert
+	rm -f *.o *.bin *.data *.elf *.a *.s *.vlog bin.lds
 	make -C inst clean
 
 -include rules.make
