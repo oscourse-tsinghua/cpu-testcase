@@ -1,7 +1,8 @@
 ver = test_hw
 #ver = sim
 
-TOPDIR=$(shell pwd | sed 's: :\\ :g') # Escape the space in dir path
+# Escape the space in dir path
+TOPDIR=$(shell pwd | sed 's: :\\ :g')
 
 export LD_PRELOAD =
 CFLAGS := -D_KERNEL -DCONFIG_PAGE_SIZE_16KB -fno-builtin -mips32r2 -msoft-float -DCACHELOCK_MEM -DMEMSTART=0x80000000 -DMEMSIZE=0x0200000 -DCPU_COUNT_PER_US=10 -I $(TOPDIR)/include -include common.h -DAPB_CLK=33333333
