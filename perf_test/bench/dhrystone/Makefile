@@ -1,4 +1,5 @@
 CC = $(CROSS_COMPILE)gcc
+AR = $(CROSS_COMPILE)ar
 
 CFLAGS+= -O3 -mno-abicalls -funroll-all-loops -falign-jumps=16 -falign-functions=16 -fgcse-sm -fgcse-las -finline-functions -finline-limit=1000 -msoft-float -EL -march=mips1 -mips1
 CFLAGS+= -G8 -DTIME -DRUNNUMBERS=100

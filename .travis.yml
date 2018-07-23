@@ -1,0 +1,10 @@
+language: c
+before_install:
+  - sudo apt-get install -y gcc-mipsel-linux-gnu
+script:
+  - make CROSS_COMPILE=mipsel-unknown-linux-gnu- -C func_test/src/
+  - make CROSS_COMPILE=mipsel-unknown-linux-gnu- -C perf_test/
+
+addons:
+  apt:
+    update: true
