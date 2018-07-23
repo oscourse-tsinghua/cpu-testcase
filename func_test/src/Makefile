@@ -23,7 +23,7 @@ libinst.a:
 	make -C inst $(TOPDIR)/$@
 
 %.elf: start.o libinst.a bin.lds
-	${CROSS_COMPILE}ld -g -T  bin.lds  -o $@ start.o -L . -linst
+	${CROSS_COMPILE}ld -EL -g -T  bin.lds  -o $@ start.o -L . -linst
 	rm libinst.a
 
 dump.s: main.elf
