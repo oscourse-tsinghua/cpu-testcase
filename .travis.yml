@@ -1,10 +1,12 @@
 language: c
 before_install:
-  - sudo apt-get install -y gcc-mipsel-linux-gnu
+  - wget --no-check-certificate -O gcc.tgz 'https://www.mips.com/?do-download=linux-x64-mti-bare-metal-2016-05-06'
+  - tar -xf gcc.tgz
 script:
-  - make CROSS_COMPILE=mipsel-unknown-linux-gnu- -C func_test/src/
-  - make CROSS_COMPILE=mipsel-unknown-linux-gnu- -C perf_test/
+  - make CROSS_COMPILE=$PWD/mips-mti-elf/2016.05-06/bin/mips-mti-elf- -C func_test/src/
+  - make CROSS_COMPILE=$PWD/mips-mti-elf/2016.05-06/bin/mips-mti-elf- -C perf_test/
 
+sudo: false
 addons:
   apt:
     update: true
