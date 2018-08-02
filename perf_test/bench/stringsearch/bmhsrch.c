@@ -11,7 +11,6 @@
 */
 //#include <limits.h>
 #define UCHAR_MAX 255                                        /* rdg 10/93 */
-#include <stddef.h>
 #include <string.h>
 typedef unsigned char uchar;
 

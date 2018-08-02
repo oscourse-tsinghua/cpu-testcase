@@ -12,7 +12,6 @@
 **  10/21/93 rdg  Fixed bug found by Jeff Dunlop
 */
 
-#include <stddef.h>
 #include <string.h>
 //#include <limits.h>
 #define UCHAR_MAX 255
