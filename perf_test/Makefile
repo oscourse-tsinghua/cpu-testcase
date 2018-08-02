@@ -65,7 +65,7 @@ main.bin: main.elf
 
 
 main.elf: start.o libtinyc.a bin.lds
-	${CROSS_COMPILE}ld -g -T bin.lds start.o bench/$(BENCH_DIR)/$(BENCH_LIB) lib/libtinyc.a -o $(OBJDIR)/$(BENCH_DIR)/$@
+	${CROSS_COMPILE}ld -EL -g -T bin.lds start.o bench/$(BENCH_DIR)/$(BENCH_LIB) lib/libtinyc.a -o $(OBJDIR)/$(BENCH_DIR)/$@
 	${CROSS_COMPILE}objdump -ald $(OBJDIR)/$(BENCH_DIR)/$@ > $(OBJDIR)/$(BENCH_DIR)/dump.s
 
 bin.lds: bin.lds.S
