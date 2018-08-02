@@ -7,4 +7,4 @@ Test cases for MIPS CPU implementation
 
 ## 仓库代码目录
  * [func_test](func_test/readme.md)：功能测试用例
- * [perf_test](pref_test)：性测试用例
+ * [perf_test](perf_test)：性测试用例
