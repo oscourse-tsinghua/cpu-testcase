@@ -1,4 +1,5 @@
-# cpu-testcase
+# cpu-testcase [![Build Status](https://travis-ci.org/z4yx/cpu-testcase.svg?branch=master)](https://travis-ci.org/z4yx/cpu-testcase)
+
 Test cases for MIPS CPU implementation
 
 ## Links
