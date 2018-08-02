@@ -16,7 +16,10 @@ typedef void * va_list;
 typedef unsigned int u_int;
 typedef unsigned long u_long;
 typedef unsigned int uint32_t;
+#ifndef NULL /* stddef.h not included */
 typedef unsigned int size_t;
+#define NULL ((void *)0)
+#endif
 
 #define isdigit(c) (c>='0' && c<='9')
 #define FMT_RJUST 0
