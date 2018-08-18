@@ -1,5 +1,5 @@
 CFLAGS := -D_KERNEL -DCONFIG_PAGE_SIZE_16KB -fno-builtin -mips1 -EL -DCACHELOCK_MEM -DMEMSTART=0x80000000 -DMEMSIZE=0x00100000 -DCPU_COUNT_PER_US=1000 -I include -include common.h -DAPB_CLK=33333333
-CFLAGS += -DLS1FSOC  -DCPU_MULT=6 -DDDR_MULT=6 -msoft-float -nostdlib
+CFLAGS += -DLS1FSOC -DCPU_MULT=6 -DDDR_MULT=6 -msoft-float -nostdlib -nostdinc -ffreestanding -fno-PIC -fno-PIE -O2 -mno-abicalls
 
 export AR CFLAGS
 export CROSS_COMPILE ?= mipsel-linux-gnu-
@@ -72,7 +72,7 @@ bin.lds: bin.lds.S
 	${CROSS_COMPILE}gcc -E -P -Umips -D_LOADER -U_MAIN $(CFLAGS) $< -o $@
 
 start.o: start.S
-	${CROSS_COMPILE}gcc -O2 $(CFLAGS) -fno-pic -mno-abicalls -g -DGUEST -I ../include -c $< -nostdinc -nostdlib
+	${CROSS_COMPILE}gcc $(CFLAGS) -g -DGUEST -I ../include -c $< 
 
 split_bin: ../utility/split_bin.cpp
 	g++ -std=c++11 -Wall -Werror -O2 -o $@ $<
