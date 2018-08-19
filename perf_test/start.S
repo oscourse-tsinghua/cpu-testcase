@@ -38,6 +38,7 @@
 #include <asm/regdef.h>
 
 	.set	noreorder
+	.set	noat
 	.globl	_start
 	.globl	start
 	.globl	__main
