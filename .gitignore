@@ -1,6 +1,9 @@
 # Prerequisites
 *.d
 
+# Xcode
+.DS_Store
+
 # Object files
 *.o
 *.ko
