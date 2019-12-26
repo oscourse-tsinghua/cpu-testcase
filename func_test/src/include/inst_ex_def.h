@@ -104,6 +104,7 @@
     li t0, unalign_pc; \
     la k1, 1234f; \
     mtc0 t0, c0_epc; \
+    nop; \
 1234:; \
     .set mips32; \
     eret; \
